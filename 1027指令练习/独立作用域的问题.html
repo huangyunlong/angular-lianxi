@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<one></one>
+<one></one>
+<one></one>
+<one></one>
+<one></one>
+<one></one>
+<script src="angular.js"></script>
+<script>
+    (function () {
+        angular.module("demo",[])
+                .directive("one",function () {
+                    return{
+                        scope:{},//独立作用域的问题
+                        strict:"AE",
+                        template:"<div class='well'><input type='txt' ng-model='txt'>{{txt}}</div>",
+
+                    }
+                })
+    })()
+</script>
+</body>
+</html>

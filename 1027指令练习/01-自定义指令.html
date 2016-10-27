@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="bootstrap.css">
+    <style>
+        .test{
+            animation: aa 1s linear;
+        }
+        @keyframes aa {
+            from{
+                background: aqua;
+            }
+            to{
+                background: black;
+            }
+        }
+    </style>
+</head>
+<body ng-controller="a">
+<!--<one>-->
+    <!--<one>-->
+    <!--</one>-->
+<!--</one>-->
+<login pc="danger" t1="用户登录" cm="login()"></login>
+<login pc="primary" t1="管理员登录" cm="login()"></login>
+<login pc="default" t1="手机登录" cm="login()"></login>
+
+<script src="angular.js"></script>
+<script>
+    (function () {
+        angular.module("demo",[])
+                .directive("login",function () {
+                    return{
+                        scope:{
+                            tl:"@",//绑定的字符串
+                            cm:"&"//绑定方法
+                        },
+                        restrict:"AE",
+                        templateUrl:"app/template/login.html",
+                        //link方法是angular编译的最后一步
+                        //link 方法相当于 指令内部模块的controller
+                        link: function (scope,element,attr,ctrls) {
+                            scope.hc=attr["pc"];
+                            scope.title = attr["t1"];
+                            scope.login =function () {
+                                alert(scope.userInfo.userName+"-------"+scope.userInfo.pwd);
+                            },
+                            element.children().children().addClass("test");
+                        }
+
+                    }
+        }).controller("a",function ($scope) {
+            $scope.userInfo={
+                userName:"",
+                pwd:""
+            };
+        })
+    })()
+</script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="demo">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+<body>
+<div ng-controller="oneCtrl">
+    <one tl="{{title}}" cm="login()"></one>
+</div>
+
+<div ng-controller="twoCtrl">
+    <one tl="{{title}}" cm="login()"></one>
+</div>
+<script src="angular.js"></script>
+<script>
+    (function () {
+        angular.module("demo",[]).directive("one",function () {
+            return{
+                scope:{
+                    tl:"@",//
+                    cm:"&"
+                },
+                strict:"AE",
+                template:"<div class='well' ng-click='cm()'>"+"{{tl}}</div>"
+            }
+        }).controller("oneCtrl",function ($scope) {
+            $scope.title="one ctrl title";
+            $scope.login =function () {
+                alert("1 from one");
+            }
+        }).controller("twoCtrl",function ($scope) {
+            $scope.title = "two ctrl title";
+            $scope.login = function () {
+                alert("2 from two");
+            }
+        })
+    })()
+</script>
+</body>
+</html>
